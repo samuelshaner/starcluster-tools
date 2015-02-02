@@ -11,7 +11,12 @@ setup_class = pkginstaller.PackageInstaller
 pkgs_to_install = ccache, python-h5py
 
 
-[cluster smallOpenMOC]
+# To launch this cluster use the following command:
+# >>> starcluster start -c OpenMOC-gpu --force-spot-master mycluster
+# This will initialize the cluster with name "mycluster" on a spot
+# instance with a bid price of $0.10, which should be sufficient for
+# the g2.2xlarge instance (average spot price ~0.065). 
+[cluster OpenMOC-gpu]
 
 # change this to the name of one of the keypair sections defined above
 KEYNAME = mykey
@@ -26,12 +31,13 @@ CLUSTER_USER = sgeadmin
 # (options: tcsh, zsh, csh, bash, ksh)
 CLUSTER_SHELL = bash
 
-# The base x86_64 StarCluster AMI is ami-3393a45a, which requires a pv (paravirtualization) instance.
-NODE_IMAGE_ID = ami-3393a45a
+# The base HVM StarCluster AMI is ami-6b211202, which is an HVM (hardware virtual machine) only AMI.
+NODE_IMAGE_ID = ami-6b211202
 
 # instance type for all cluster nodes. Note that with ami-3393a45a, the instance must support pv AMIs.
-NODE_INSTANCE_TYPE = m1.small
+NODE_INSTANCE_TYPE = g2.2xlarge
 
 # Install ccache and python-h5py
 PLUGINS = OpenMOC
 
+SPOT_BID = 0.1

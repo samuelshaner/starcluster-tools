@@ -4,9 +4,38 @@ import subprocess
 import os
 
 # information on instance types to query
-instance_library_types = ['c1.medium', 'c1.xlarge', 'c3.2xlarge', 'c3.4xlarge', 'c3.8xlarge', 'c3.large', 'c3.xlarge', 'cc1.4xlarge', 'cc2.8xlarge', 'cg1.4xlarge', 'cr1.8xlarge', 'g2.2xlarge', 'hi1.4xlarge', 'hs1.8xlarge', 'i2.2xlarge', 'i2.4xlarge', 'i2.8xlarge', 'i2.xlarge', 'm1.large', 'm1.medium', 'm1.small', 'm1.xlarge', 'm2.2xlarge', 'm2.4xlarge', 'm2.xlarge', 'm3.2xlarge', 'm3.large', 'm3.medium', 'm3.xlarge', 'r3.2xlarge', 'r3.4xlarge', 'r3.8xlarge', 'r3.large', 'r3.xlarge', 't1.micro', 't2.medium', 't2.micro', 't2.small', 'c4.large', 'c4.xlarge', 'c4.2xlarge', 'c4.4xlarge', 'c4.8xlarge']
-instance_library_vCPUs = [2, 8, 8, 16, 32, 2, 4, 16, 32, 16, 32, 8, 16, 16, 8, 16, 32, 4, 2, 1, 1, 4, 4, 8, 2, 8, 2, 1, 4, 8, 16, 32, 2, 4, 1, 2, 1, 1, 2, 4, 8, 16, 32]
-instance_library_on_demand = [0.13, 0.52, 0.42, 0.84, 1.68, 0.105, 0.21, 1.05, 2.00, 2.1, 3.5, 0.65, 3.1, 4.6, 1.705, 3.410, 6.820, 0.853, 0.175, 0.087, 0.044, 0.35, 0.49, 0.98, 0.245, 0.56, 0.14, 0.07, 0.28, 0.7, 1.4, 2.8, 0.175, 0.35, 0.02, 0.052, 0.013, 0.026, 0.116, 0.232, 0.464, 0.928, 1.856] 
+instance_library_types = ['c1.medium'  , 'c1.xlarge'  , \
+                          'c3.large'   , 'c3.xlarge'  , 'c3.2xlarge' , 'c3.4xlarge', 'c3.8xlarge' , \
+                          'cc2.8xlarge', 'cg1.4xlarge', 'cr1.8xlarge', 'g2.2xlarge', 'hi1.4xlarge', 'hs1.8xlarge', \
+                          'i2.xlarge'  , 'i2.2xlarge' , 'i2.4xlarge' , 'i2.8xlarge', \
+                          'm1.small'   , 'm1.medium'  , 'm1.large'   , 'm1.xlarge' , \
+                          'm2.xlarge'  , 'm2.2xlarge' , 'm2.4xlarge' , \
+                          'm3.medium'  , 'm3.large'   , 'm3.xlarge'  , 'm3.2xlarge', \
+                          'r3.large', 'r3.xlarge', 'r3.2xlarge' , 'r3.4xlarge', 'r3.8xlarge', \
+                          't1.micro'   , 't2.micro', 't2.small', 't2.medium', \
+                          'c4.large'   , 'c4.xlarge', 'c4.2xlarge', 'c4.4xlarge', 'c4.8xlarge']
+
+instance_library_vCPUs = [ 2,  8, \
+                           2,  4,  8, 16, 32, \
+                          32, 16, 32,  8, 16, 16, \
+                           4,  8, 16, 32, \
+                           1,  1,  2,  4, \
+                           2,  4,  8, \
+                           1,  2,  4,  8, \
+                           2,  4,  8, 16, 32, \
+                           1,  2,  1,  1, \
+                           2,  4,  8, 16, 32]
+
+instance_library_on_demand = [0.13, 0.52, \
+                              0.105, 0.21, 0.42, 0.84, 1.68, \
+                              2.00, 2.1, 3.5, 0.65, 3.1, 4.6, \
+                              1.705, 3.410, 6.820, 0.853, \
+                              0.044, 0.087, 0.175,  0.35, \
+                              0.49, 0.98, 0.245, \
+                              0.07, 0.14, 0.28, 0.56, \
+                              0.175, 0.35, 0.7, 1.4, 2.8, \
+                              0.02, 0.013, 0.026, 0.052, \
+                              0.116, 0.232, 0.464, 0.928, 1.856] 
 
 # list to save info on spot prices
 instance_types = []
@@ -49,7 +78,7 @@ for i,instance in enumerate(instance_library_types):
     if len(data) > 1:
         
         # print info on spot prices
-        print instance
+        print instance + ' - On Demand Price: $' + str(instance_library_on_demand[i])
         print data[1].split()
         print data[2].split()
         print data[3].split()

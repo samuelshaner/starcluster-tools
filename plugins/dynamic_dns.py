@@ -11,7 +11,7 @@ from starcluster.logger import log
 
    ######################################################
    [plugin dynamic-dns]
-   setup_class = dynamic_dns.PackageInstaller
+   setup_class = dynamic_dns.SetupDynamicDNS
 
    username = samuelshaner
    password = yGL1x40ELVv0
@@ -27,7 +27,7 @@ from starcluster.logger import log
    address of your EC2 instance.
 
 '''
-class PackageInstaller(ClusterSetup):
+class SetupDynamicDNS(ClusterSetup):
   def __init__(self, username, password, hostname):
     self.username = username
     self.password = password
